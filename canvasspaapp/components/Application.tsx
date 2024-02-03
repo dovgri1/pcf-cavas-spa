@@ -8,6 +8,26 @@ import { GridComponent } from './Grid';
 
 
 export const Application: React.FC = () => {
+    const [childData, setChildData] = React.useState("");
+
+    const handleBottomNavigationChange = (data: string) => {
+        setChildData(data);
+        console.log(data)
+      };
+
+    const ComponentToReturn = () => {
+        if(childData == 'Selected index is 1'){
+            return (
+                <GridComponent></GridComponent>
+            )
+        }else{
+            return (
+                <GridComponent></GridComponent>
+            )
+        }
+
+    }
+
     return (
         <ThemeProvider theme={Theme}>
             <Box sx={{
@@ -17,25 +37,30 @@ export const Application: React.FC = () => {
                     width: '100%',
                     justifyContent:'space-between'
                     }}>
-                        <Box sx={{ justifyContent:'start', height:'15%'}}>
+                        <Box sx={{ 
+                                    justifyContent:'start', 
+                                    height:'15%'
+                                }}>
                             <ApplicationTopBar />
                         </Box>
-                        <Box sx={{justifyContent:'center', 
-                                  alignItems:'center',
-                                  height:'75%'
+                        <Box sx={{
+                                    justifyContent:'center', 
+                                    alignItems:'center',
+                                    height:'75%'
                                 }}>
-                            <GridComponent></GridComponent>
+                                    
+                            <ComponentToReturn></ComponentToReturn>
                         </Box>
                         <Box sx={{ 
-                            position: 'relative', 
-                            width: '100%', 
-                            height:'10%',
-                            bottom: 0, 
-                            left: 0, 
-                            zIndex: 1000,
-                            justifyItems:'end'
-                        }}>
-                            <ApplicationBottomNavigation />
+                                    position: 'relative', 
+                                    width: '100%', 
+                                    height:'10%',
+                                    bottom: 0, 
+                                    left: 0, 
+                                    zIndex: 1000,
+                                    justifyItems:'end'
+                                }}>
+                            <ApplicationBottomNavigation onBottomNavigationChange={handleBottomNavigationChange} />
                         </Box>
                 </Box>
         </ThemeProvider>
