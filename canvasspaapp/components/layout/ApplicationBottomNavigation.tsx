@@ -19,11 +19,11 @@ export const ApplicationBottomNavigation: React.FC<ChildProps> = ({
   };
   return (
     <BottomNavigation
-      style={{ zIndex: 1201 }}
+      sx={{ display:'flex', alignItems: 'flex-end', mt:2, justifyContent: "flex-start" }}
       onChange={handleInputChange}
       value={inputValue}
     >
-      <BottomNavigationAction key={1} label="Recents" icon={<RestoreIcon />} />
+      <BottomNavigationAction key={1} label="Recents" icon={<RestoreIcon />}/>
       <BottomNavigationAction
         key={2}
         label="Favorites"

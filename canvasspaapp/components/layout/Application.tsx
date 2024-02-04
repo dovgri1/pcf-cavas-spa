@@ -5,6 +5,7 @@ import { ApplicationBottomNavigation } from "./ApplicationBottomNavigation";
 import { Theme } from "../style/Theme";
 import { ThemeProvider } from "@mui/material/styles";
 import { GridComponent } from "../grids/GridComponent";
+import {ApplicationBottomNavigationCard} from './ApplicationBottomNavigationCard'
 
 export const Application: React.FC = () => {
   const [childData, setChildData] = React.useState("");
@@ -27,7 +28,7 @@ export const Application: React.FC = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          height: "85vh",
+          height: "90vh",
           width: "100%",
           justifyContent: "space-between",
         }}
@@ -35,7 +36,7 @@ export const Application: React.FC = () => {
         <Box
           sx={{
             justifyContent: "start",
-            height: "15%",
+            height: "10%",
           }}
         >
           <ApplicationTopBar />
@@ -43,7 +44,7 @@ export const Application: React.FC = () => {
         <Box
           sx={{
             justifyContent: "center",
-            height: "75%",
+            height: "82%",
             display: "flex",
             flexDirection: "row",
           }}
@@ -52,15 +53,14 @@ export const Application: React.FC = () => {
         </Box>
         <Box
           sx={{
-            position: "relative",
             width: "100%",
-            height: "10%",
-            bottom: 0,
-            left: 0,
-            justifyItems: "end",
+            height: "8%",
+            justifyItems: 'end',
+            justifyContent:'center',
+            display:'flex'
           }}
         >
-          <ApplicationBottomNavigation
+          <ApplicationBottomNavigationCard
             onBottomNavigationChange={handleBottomNavigationChange}
           />
         </Box>

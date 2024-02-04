@@ -5,23 +5,44 @@ import { TableComponent } from "../tables/TableComponent";
 
 export const GridComponent: React.FC = () => {
   return (
-    <Box
-      sx={{ width: "100%", display: "flex", justifyContent: "center" }}
-    >
-      <Grid container spacing={2} sx={{justifyContent: "center", display: "flex"}}>
-        <Grid item xs={12} md={8} sx={{display: "flex", justifyContent: "center" }} >
-          <Box sx={{height: "90%", width: "100%", display: "flex", ml: {sm: 2}}}>
+    <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+      <Grid
+        container
+        spacing={2}
+        sx={{ justifyContent: "center", display: "flex" }}
+      >
+        <Grid
+          item
+          xs={12}
+          md={8}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
+          <Box
+            sx={{
+              height: "95%",
+              width: "100%",
+              display: "flex",
+              mr: { md: 0, sm: 1, xs: 1 },
+              ml: { md: 2, sm: 1, xs: 1 },
+            }}
+          >
             <TableComponent></TableComponent>
           </Box>
         </Grid>
-        <Grid item xs={12} md={4} sx={{display: "flex", justifyContent: "center" }}>
+        <Grid
+          item
+          xs={12}
+          md={4}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
           <Paper
             elevation={10}
             sx={{
-              height: "90%",
+              height: "95%",
               width: "100%",
-              display: 'flex',
-              mr: {sm: 2}
+              display: "flex",
+              mr: { md: 2, sm: 1, xs: 1 },
+              ml: { md: 0, sm: 1, xs: 1 },
             }}
           >
             <Typography>Selected Record Information Goes Here</Typography>
