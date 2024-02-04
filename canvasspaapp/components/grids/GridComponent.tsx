@@ -2,6 +2,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import * as React from "react";
 import { TableComponent } from "../tables/TableComponent";
+import { FilePickerComponent } from "../controlers/FilePickerComponent";
 
 export const GridComponent: React.FC = () => {
   return (
@@ -45,7 +46,7 @@ export const GridComponent: React.FC = () => {
               ml: { md: 0, sm: 1, xs: 1 },
             }}
           >
-            <Typography>Selected Record Information Goes Here</Typography>
+            <FilePickerComponent/>
           </Paper>
         </Grid>
       </Grid>
