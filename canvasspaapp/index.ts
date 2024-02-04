@@ -1,5 +1,5 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
-import { Application } from "./components/Application";
+import { Application } from "./components/layout/Application";
 import * as React from "react";
 import { setContext } from "./services/DataService";
 

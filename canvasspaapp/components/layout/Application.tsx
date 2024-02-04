@@ -2,9 +2,9 @@ import { Box } from "@mui/material";
 import * as React from "react";
 import { ApplicationTopBar } from "./ApplicationTopBar";
 import { ApplicationBottomNavigation } from "./ApplicationBottomNavigation";
-import { Theme } from "./Theme";
+import { Theme } from "../style/Theme";
 import { ThemeProvider } from "@mui/material/styles";
-import { GridComponent } from "./GridComponent";
+import { GridComponent } from "../grids/GridComponent";
 
 export const Application: React.FC = () => {
   const [childData, setChildData] = React.useState("");
