@@ -7,25 +7,25 @@ import { TableComponent } from './TableComponent';
 
 export const GridComponent : React.FC = () => {
     return (
-        <Box>
-            <Grid container spacing={2}>
+        <Box sx={{width: '100%', display:'flex', justifyContent:'space-between'}}>
+            <Grid container spacing={2} sx={{display:'flex', justifyContent:'space-between'}}>
                 <Grid item xs={6} md={8}>
-                    <Paper sx={{ml:2, height:'100%'}}>
+                    <Box sx={{ml:2, height:'90%', width:'98%', display:'flex'}}>
                         <TableComponent></TableComponent>
-                    </Paper>  
+                    </Box>  
                 </Grid>
                 <Grid item xs={6} md={4}>
-                <Paper sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: '100%', 
-                    mr: 2
-                }}>
-            <Typography>
-              Selected Record Information Goes Here
-            </Typography>
-          </Paper> 
+                    <Paper 
+                        elevation={10}
+                        sx={{
+                            height: '90%',
+                            width:'98%',
+                            mr: 2
+                        }}>
+                        <Typography>
+                        Selected Record Information Goes Here
+                        </Typography>
+                    </Paper> 
                 </Grid>
             </Grid>
         </Box>

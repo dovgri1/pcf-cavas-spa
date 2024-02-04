@@ -45,8 +45,9 @@ export const Application: React.FC = () => {
                         </Box>
                         <Box sx={{
                                     justifyContent:'center', 
-                                    alignItems:'center',
-                                    height:'75%'
+                                    height:'75%',
+                                    display:'flex',
+                                    flexDirection: 'row'
                                 }}>
                                     
                             <ComponentToReturn></ComponentToReturn>

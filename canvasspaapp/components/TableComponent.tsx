@@ -6,118 +6,118 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { TableFooter, TablePagination } from '@mui/material';
+import { Box, TableFooter, TablePagination } from '@mui/material';
 import { _context } from '../services/DataService';
-
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+import { Column, IsIndex, RecordItem } from '../interfaces/interfaces';
 
 
 
 export const TableComponent : React.FC = () => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    const handleChangePage = (event: unknown, newPage: number) => {
-        setPage(newPage);
-      };
-    console.log(_context);
+    const handleChangePage = (event: unknown, newPage: number) => {setPage(newPage)};
+    const [items, setItems] = React.useState<RecordItem[]>([]);
+    const [columns, setColumns] = React.useState<Column[]>([]);
+    const dataSet : ComponentFramework.PropertyTypes.DataSet = _context.parameters.sampleDataSet;
+
+    React.useEffect(() => {
+      const newColumns: Column[] = dataSet.columns.map(
+        (column: any) => ({
+            key: column.name,
+            name: column.alias,
+            fieldName: column.displayName,
+            minWidth: column.visualSizeFactor,
+            maxWidth: column.visualSizeFactor,
+            isResizable: true,
+            isIndex: column,
+        })
+    )
+    setColumns(newColumns)
+
+    const newItems : RecordItem[] = dataSet.sortedRecordIds.map(
+      (recordId: any) => {
+          const record = dataSet.records[recordId]
+          const item: RecordItem = { id: recordId }
+          newColumns.forEach((column) => {
+              item[column.name] = record.getValue(column.key)
+          })
+          return item
+      }
+    )
+    setItems(newItems);
+
+    },[_context.parameters.sampleDataSet]);
+
+    function RenderCells(props: { columns: Column[]; row: RecordItem }){
   return (
     <React.Fragment>
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650  }} size='small' aria-label="simple table">
+        {props.columns.map((column) => {
+            if (column.isIndex.dataType.includes('SingleLine')) {
+                return (
+                    <TableCell key={column.name}>
+                        {props.row[column.name]}
+                    </TableCell>
+                )
+            } else if (column.isIndex.dataType === 'Lookup.Simple') {
+                return (
+                    <TableCell key={column.name}>
+                        {props.row[column.name]?.name}
+                    </TableCell>
+                )
+            } else if (column.isIndex.dataType.includes('OptionSet')) {
+                return <TableCell key={column.name}>{props.row[column.name]}</TableCell>
+            } else {
+                return <TableCell key={column.name}>{props.row[column.name]}</TableCell>
+            }
+        })}
+    </React.Fragment>
+  )
+    }
+
+  return (
+    <React.Fragment>
+      <Box sx={{display:'flex', flexDirection:'column', justifyContent:'center', width:'100%', gap:2}}>
+      <TableContainer elevation={10} component={Paper} sx={{ width:'100%',  height: '100%'}}>
+            <Table sx={{width:'100%' }} size='small' aria-label="simple table">
                 <TableHead>
                 <TableRow>
-                    <TableCell>Dessert (100g serving)</TableCell>
-                    <TableCell align="right">Calories</TableCell>
-                    <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                    <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                    <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                  {
+                    columns.map((column) => (
+                      <TableCell key={column.name}>
+                          {column.fieldName}
+                      </TableCell>
+                    ))
+                  }
                 </TableRow>
                 </TableHead>
                 <TableBody>
                 {(rowsPerPage > 0 
-                   ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) 
-                   : rows ).map((row) => (
+                   ? items.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) 
+                   : items ).map((item) => (
                         <TableRow
-                        hover
-                        onClick= {(event) => console.log(event)}
-                        key={row.name}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor:'pointer' }}
-                        >
-                        <TableCell component="th" scope="row">
-                            {row.name}
-                        </TableCell>
-                        <TableCell align="right">{row.calories}</TableCell>
-                        <TableCell align="right">{row.fat}</TableCell>
-                        <TableCell align="right">{row.carbs}</TableCell>
-                        <TableCell align="right">{row.protein}</TableCell>
+                          hover
+                          onClick= {(event) => console.log(event)}
+                          key={item.id}
+                          sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor:'pointer' }}
+                          >
+                          <RenderCells columns={columns} row={item}></RenderCells>
                         </TableRow>
                 ))}
                 </TableBody>
-                <TableFooter>
-                    <TableRow>
-                    <TablePagination
-                        component="div"
-                        count={rows.length}
-                        rowsPerPage={10}
-                        page={page}
-                        onPageChange={handleChangePage}
-                        />
-                    </TableRow>
-                </TableFooter>
-            </Table>
-            
+                
+            </Table>   
         </TableContainer>
+        <Paper elevation={10} sx={{display:'flex', justifyContent:'center', justifyItems:'center', width: '100%', height:'12%'}}>
+          <TablePagination
+              component="div"
+              count={items.length}
+              rowsPerPage={10}
+              page={page}
+              onPageChange={handleChangePage}
+            />
+        </Paper>
+      </Box>
+
         
     </React.Fragment>
    
