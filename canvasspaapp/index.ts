@@ -1,6 +1,7 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import { Application } from "./components/Application";
 import * as React from "react";
+import { setContext } from "./services/DataService";
 
 export class canvasspaapp implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
@@ -24,6 +25,7 @@ export class canvasspaapp implements ComponentFramework.ReactControl<IInputs, IO
         state: ComponentFramework.Dictionary
     ): void {
         this.notifyOutputChanged = notifyOutputChanged;
+        setContext(context);
     }
 
     /**

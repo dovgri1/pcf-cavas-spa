@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { TableFooter, TablePagination } from '@mui/material';
+import { _context } from '../services/DataService';
 
 function createData(
   name: string,
@@ -69,7 +70,7 @@ export const TableComponent : React.FC = () => {
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
       };
-
+    console.log(_context);
   return (
     <React.Fragment>
         <TableContainer component={Paper}>

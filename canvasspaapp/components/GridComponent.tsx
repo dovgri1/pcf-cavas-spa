@@ -1,7 +1,7 @@
 import { Box, Paper, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid';
 import * as React from 'react'
-import { TableComponent } from './Table';
+import { TableComponent } from './TableComponent';
 
 
 

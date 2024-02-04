@@ -4,7 +4,7 @@ import { ApplicationTopBar } from './ApplicationTopBar';
 import {ApplicationBottomNavigation} from './ApplicationBottomNavigation'
 import {Theme} from './Theme';
 import { ThemeProvider } from '@mui/material/styles';
-import { GridComponent } from './Grid';
+import { GridComponent } from './GridComponent';
 
 
 export const Application: React.FC = () => {
