@@ -34,7 +34,7 @@ export const ApplicationBottomNavigationCard: React.FC<ChildProps> = ({
         justifyItems: "end",
       }}
     >
-      <Box sx={{ display: "flex", gap: 10, width: '25%' }}>
+      <Box sx={{ display: "flex", gap: 10, width: '25%', justifyContent:'center' }}>
         <IconButton
           sx={{
             width:'25%'

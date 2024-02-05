@@ -9,8 +9,11 @@ import Paper from "@mui/material/Paper";
 import { Box, TablePagination } from "@mui/material";
 import { _context } from "../../services/DataService";
 import { Column, RecordItem } from "../../interfaces/interfaces";
+import {useSelectedRecord} from "../store/useSelectedRecord"
 
-export const TableComponent: React.FC = () => {
+
+export const MainTableComponent: React.FC = () => {
+  const setSelectedRecord = useSelectedRecord((state) => state.setUser)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -20,6 +23,10 @@ export const TableComponent: React.FC = () => {
   const [columns, setColumns] = React.useState<Column[]>([]);
   const dataSet: ComponentFramework.PropertyTypes.DataSet =
     _context.parameters.sampleDataSet;
+
+  const handleRowClick = (event : React.MouseEvent<HTMLTableRowElement, MouseEvent>, item : RecordItem) => {
+    setSelectedRecord(item);
+  };
 
   React.useEffect(() => {
     const newColumns: Column[] = dataSet.columns.map((column: any) => ({
@@ -108,7 +115,7 @@ export const TableComponent: React.FC = () => {
               ).map((item) => (
                 <TableRow
                   hover
-                  onClick={(event) => console.log(event)}
+                  onClick={(event) => handleRowClick(event, item)}
                   key={item.id}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },

@@ -1,8 +1,10 @@
 import { Box, Paper, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import * as React from "react";
-import { TableComponent } from "../tables/TableComponent";
+import { MainTableComponent } from "../tables/MainTableComponent";
 import { FilePickerComponent } from "../controlers/FilePickerComponent";
+import { SideTimelineComponent } from "../tables/SideTimelineComponent";
+
 
 export const GridComponent: React.FC = () => {
   return (
@@ -27,7 +29,7 @@ export const GridComponent: React.FC = () => {
               ml: { md: 2, sm: 1, xs: 1 },
             }}
           >
-            <TableComponent></TableComponent>
+            <MainTableComponent></MainTableComponent>
           </Box>
         </Grid>
         <Grid
@@ -42,11 +44,12 @@ export const GridComponent: React.FC = () => {
               height: "95%",
               width: "100%",
               display: "flex",
+              justifyItems:'center',
               mr: { md: 2, sm: 1, xs: 1 },
               ml: { md: 0, sm: 1, xs: 1 },
             }}
           >
-            <FilePickerComponent/>
+              <SideTimelineComponent />
           </Paper>
         </Grid>
       </Grid>

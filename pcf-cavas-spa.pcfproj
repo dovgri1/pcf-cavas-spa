@@ -11,6 +11,7 @@
     <Name>pcf-cavas-spa</Name>
     <ProjectGuid>08420652-3775-4841-9495-dcfc6a2b3dc9</ProjectGuid>
     <OutputPath>$(MSBuildThisFileDirectory)out\controls</OutputPath>
+    <PcfBuildMode>development</PcfBuildMode>
   </PropertyGroup>
 
   <PropertyGroup>
