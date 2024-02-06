@@ -28,9 +28,10 @@ export const Application: React.FC = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          height: "90vh",
+          height: "100%",
           width: "100%",
           justifyContent: "space-between",
+          
         }}
       >
         <Box

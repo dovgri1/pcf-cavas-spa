@@ -34,14 +34,18 @@ export const SideTimelineComponent: React.FC = () => {
   }
 
   return (
-    <Box sx={{ width: "100%", height: "100%", display: "flex" }}>
+    <Box sx={{ width: "100%", height: "100%" }}>
       <Timeline
         position="alternate"
         sx={{
-          width: "100%",
-          height: "100%",
+          width:"100%",
+          height:'100%',
+          overflowY: "auto", // Corrected property for vertical scrolling
           display: "flex",
-          justifyContent: "center",
+          flexDirection: "column", // Ensures items are laid out vertically
+          flexWrap: "nowrap", // Prevents wrapping of items
+          justifyContent: "flex-start", // Aligns items to the start of the flex container
+          
         }}
       >
         {timelineItems?.entities.map((item, index, array) => (

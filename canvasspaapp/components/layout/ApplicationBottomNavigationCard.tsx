@@ -36,10 +36,6 @@ export const ApplicationBottomNavigationCard: React.FC<ChildProps> = ({
     >
       <Box sx={{ display: "flex", gap: 10, width: '25%', justifyContent:'center' }}>
         <IconButton
-          sx={{
-            width:'25%'
-          }}
-          size="large"
           color={inputValue === 0 ? "primary" : "default"}
           onClick={handleInputChange(0)}
         >
@@ -48,18 +44,12 @@ export const ApplicationBottomNavigationCard: React.FC<ChildProps> = ({
         <IconButton
           color={inputValue === 1 ? "primary" : "default"}
           onClick={handleInputChange(1)}
-          sx={{
-            width:'25%'
-          }}
         >
           <FavoriteIcon />
         </IconButton>
         <IconButton
           color={inputValue === 2 ? "primary" : "default"}
           onClick={handleInputChange(2)}
-          sx={{
-            width:'25%'
-          }}
         >
           <LocationOnIcon />
         </IconButton>

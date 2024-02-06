@@ -6,14 +6,27 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Box, TablePagination } from "@mui/material";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import {
+  Box,
+  Button,
+  Dialog,
+  IconButton,
+  TablePagination,
+  Typography,
+} from "@mui/material";
 import { _context } from "../../services/DataService";
 import { Column, RecordItem } from "../../interfaces/interfaces";
-import {useSelectedRecord} from "../store/useSelectedRecord"
-
+import { useSelectedRecord } from "../store/useSelectedRecord";
+import { SideTimelineComponent } from "./SideTimelineComponent";
+import { Theme } from "../style/Theme";
+import { useMediaQuery } from "@mui/material";
+import { useOpenDialog } from "../store/useOpenDialog";
 
 export const MainTableComponent: React.FC = () => {
-  const setSelectedRecord = useSelectedRecord((state) => state.setUser)
+  const matchesMD = useMediaQuery(Theme.breakpoints.up("md"));
+  const setSelectedRecord = useSelectedRecord((state) => state.setUser);
+  const selectedRecord = useSelectedRecord((state) => state.user);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -23,9 +36,30 @@ export const MainTableComponent: React.FC = () => {
   const [columns, setColumns] = React.useState<Column[]>([]);
   const dataSet: ComponentFramework.PropertyTypes.DataSet =
     _context.parameters.sampleDataSet;
+  const [openEventsDialog, SetOpenEventsDialog] =
+    React.useState<boolean>(false);
+  const setOpenDialog = useOpenDialog((state) => state.setOpen);
 
-  const handleRowClick = (event : React.MouseEvent<HTMLTableRowElement, MouseEvent>, item : RecordItem) => {
+  const handleRowClick = (
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
+    item: RecordItem
+  ) => {
     setSelectedRecord(item);
+    if (!matchesMD) {
+      SetOpenEventsDialog(true);
+    }
+  };
+
+  const handleDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleClose = () => {
+    SetOpenEventsDialog(false);
+  };
+
+  const refreshDataset = () => {
+    _context.parameters.sampleDataSet.refresh();
   };
 
   React.useEffect(() => {
@@ -92,6 +126,64 @@ export const MainTableComponent: React.FC = () => {
           gap: 2,
         }}
       >
+        <Dialog
+          open={openEventsDialog}
+          onClose={handleClose}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            justifyItems: "center",
+          }}
+        >
+          <Box
+            sx={{
+              height: "10%",
+              display: "flex",
+              flexDirection: "column",
+              justifyItems: "center",
+              justifyContent: "center",
+              overFlowY: "auto",
+              mt: 2,
+            }}
+          >
+            <Typography
+              sx={{ justifyContent: "center", display: "flex" }}
+              variant="h5"
+            >
+              {"Record Events " + selectedRecord["fullname"]}
+            </Typography>
+          </Box>
+          <Box sx={{ height: { xs: "65%", md: "80%" }, ml: 2, mr: 2 }}>
+            <SideTimelineComponent />
+          </Box>
+          <Box
+            sx={{
+              height: { xs: "25%", md: "10%" },
+              mb: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyItems: "end",
+              justifyContent: "end",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
+              <Button
+                sx={{ position: "relative" }}
+                color="primary"
+                variant="contained"
+                onClick={handleDialog}
+              >
+                Create New Event
+              </Button>
+            </Box>
+          </Box>
+        </Dialog>
         <TableContainer
           elevation={10}
           component={Paper}
@@ -132,6 +224,7 @@ export const MainTableComponent: React.FC = () => {
           elevation={10}
           sx={{
             display: "flex",
+            flexDirection: 'row',
             justifyContent: "center",
             justifyItems: "center",
             width: "100%",
@@ -139,12 +232,26 @@ export const MainTableComponent: React.FC = () => {
           }}
         >
           <TablePagination
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              justifyItems: "center",
+            }}
             component="div"
             count={items.length}
             rowsPerPage={10}
             page={page}
             onPageChange={handleChangePage}
           />
+          <Box sx={{display:"flex", flexDirection:'column', justifyContent:"center", justifyItems:'center'}}>
+            <IconButton
+              color={"default"}
+              onClick={refreshDataset}
+            >
+              <RefreshIcon />
+            </IconButton>
+          </Box>
         </Paper>
       </Box>
     </React.Fragment>

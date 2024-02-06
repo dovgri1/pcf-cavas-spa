@@ -106,12 +106,35 @@ export const Theme = createTheme({
     MuiButton:{
       styleOverrides:{
         root:{
-          height: 40,
-          width: 170,
-          fontSize: 12,
-          fontWeight: 650
+          '@media (max-width:600px)': { // xs: small devices
+            height: '32px',
+            width: '120px',
+            fontSize: '0.5rem',
+            fontWeight: 600
+          },
+          '@media (min-width:600px)': { // sm: medium devices and up
+            height: '40px',
+            width: '150px',
+            fontSize: '0.7rem',
+            fontWeight: 600
+          },
+          '@media (min-width:900px)': { // md: large devices and up
+            height: '48px',
+            width: '170px',
+            fontSize: '0.75rem',
+            fontWeight: 600
+          },
           
         }
+      }
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: { // Target the root style of the component
+          borderRadius: '50%', // Ensure the hover effect maintains a circular shape
+          width:'60px',
+          height: '60px'
+        },
       }
     }
   },
