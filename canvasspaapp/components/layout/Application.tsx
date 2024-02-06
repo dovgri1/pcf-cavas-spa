@@ -28,7 +28,7 @@ export const Application: React.FC = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          height: "100%",
+          height: "95vh",
           width: "100%",
           justifyContent: "space-between",
           
