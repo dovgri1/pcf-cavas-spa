@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
 import * as React from "react";
 import { ApplicationTopBar } from "./ApplicationTopBar";
-import { ApplicationBottomNavigation } from "./ApplicationBottomNavigation";
 import { Theme } from "../style/Theme";
 import { ThemeProvider } from "@mui/material/styles";
 import { GridComponent } from "../grids/GridComponent";
 import {ApplicationBottomNavigationCard} from './ApplicationBottomNavigationCard'
+import {NewEventDialogComponent} from '../controlers/CreateNewEventComponent'
 
 export const Application: React.FC = () => {
   const [childData, setChildData] = React.useState("");
@@ -50,6 +50,7 @@ export const Application: React.FC = () => {
           }}
         >
           <ComponentToReturn></ComponentToReturn>
+          <NewEventDialogComponent></NewEventDialogComponent>
         </Box>
         <Box
           sx={{

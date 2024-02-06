@@ -24,6 +24,9 @@
       <property-set name="samplePropertySet" display-name-key="Property_Display_Key" description-key="Property_Desc_Key" of-type="SingleLine.Text" usage="bound" required="true" />
       -->
     </data-set>
+
+     <property name="eventEntitySchema" display-name-key="eventEntitySchema" description-key="Schema Name of Event Entity" of-type="SingleLine.Text" usage="input" required="false" />
+
     <resources>
       <code path="index.ts" order="1"/>
       <platform-library name="React" version="16.8.6" />
