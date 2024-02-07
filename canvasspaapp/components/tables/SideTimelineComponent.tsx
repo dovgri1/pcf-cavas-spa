@@ -9,12 +9,13 @@ import * as React from "react";
 import { getSelectedChildRecords } from "../../services/DataService";
 import { useSelectedRecord } from "../store/useSelectedRecord";
 import { useOpenDialog } from "../store/useOpenDialog";
+import { Entity } from "../../interfaces/interfaces";
 
 export const SideTimelineComponent: React.FC = () => {
   const selectedRecord = useSelectedRecord((state) => state.user);
   const dialogStatus = useOpenDialog((state) => state.open);
   const [timelineItems, setTimelineItems] =
-    React.useState<ComponentFramework.WebApi.RetrieveMultipleResponse>();
+    React.useState<Entity[]>();
 
   React.useEffect(() => {
     if (selectedRecord?.id != undefined && dialogStatus == false) {
@@ -48,7 +49,7 @@ export const SideTimelineComponent: React.FC = () => {
           
         }}
       >
-        {timelineItems?.entities.map((item, index, array) => (
+        {timelineItems?.map((item, index, array) => (
           <TimelineItem key={item.new_name}>
             <TimelineSeparator>
               <TimelineDot color="primary" />

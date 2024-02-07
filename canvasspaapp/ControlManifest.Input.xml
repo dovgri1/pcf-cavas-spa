@@ -26,6 +26,13 @@
     </data-set>
 
      <property name="eventEntitySchema" display-name-key="eventEntitySchema" description-key="Schema Name of Event Entity" of-type="SingleLine.Text" usage="input" required="false" />
+     <property name="eventEntityNameSchema" display-name-key="eventEntityNameSchema" description-key="Schema Name of Event Name Attribute" of-type="SingleLine.Text" usage="input" required="false" />
+     <property name="eventEntityDateSchema" display-name-key="eventEntityDateSchema" description-key="Schema Name of Event Date Attribute" of-type="SingleLine.Text" usage="input" required="false" />
+     <property name="environmentUrl" display-name-key="environmentUrl" description-key="Url of dataverse environment" of-type="SingleLine.Text" usage="input" required="false" />
+     <property name="eventRelatedEntitySchema" display-name-key="eventRelatedEntitySchema" description-key="Schema name of Event Entity Related Entity Lookup Field" of-type="SingleLine.Text" usage="input" required="false" />
+     <property name="appType" display-name-key="appType" description-key="Type of the App" of-type="SingleLine.Text" usage="input" required="false" />
+     <property name="applicationId" display-name-key="applicationId" description-key="Application Id used for Access Token grant" of-type="SingleLine.Text" usage="input" required="false" />
+     <property name="tenantId" display-name-key="tenantId" description-key="Tenant Id used for Access Token grant" of-type="SingleLine.Text" usage="input" required="false" />
 
     <resources>
       <code path="index.ts" order="1"/>

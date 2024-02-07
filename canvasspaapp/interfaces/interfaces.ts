@@ -20,3 +20,7 @@ export interface IsIndex {
 export interface RecordItem {
     [key: string]: any
 }
+
+export interface Entity {
+    [key: string]: any;
+  }

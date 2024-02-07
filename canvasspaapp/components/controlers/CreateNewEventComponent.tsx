@@ -29,7 +29,7 @@ export const NewEventDialogComponent: React.FC = () => {
     const eventDate = formData.get("eventDate");
     if(eventName !== null && eventDate !== null){
         result = await createNewEvent(eventName?.toString(), eventDate.toString(), selectedRecord.id );
-        getSelectedChildRecords(selectedRecord.id );
+        //await getSelectedChildRecords(selectedRecord.id );
     }
     
     handleClose(); 
