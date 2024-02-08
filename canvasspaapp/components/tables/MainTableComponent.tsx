@@ -22,16 +22,22 @@ import { SideTimelineComponent } from "./SideTimelineComponent";
 import { Theme } from "../style/Theme";
 import { useMediaQuery } from "@mui/material";
 import { useOpenDialog } from "../store/useOpenDialog";
+import { usePageNumber, useRowsPerPage } from "../store/usePagingOptions";
 
 export const MainTableComponent: React.FC = () => {
   const matchesMD = useMediaQuery(Theme.breakpoints.up("md"));
   const setSelectedRecord = useSelectedRecord((state) => state.setUser);
   const selectedRecord = useSelectedRecord((state) => state.user);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const page = usePageNumber((state) => state.page);
+  const setPage = usePageNumber((state) => state.setPage);
+  const rowsPerPage = useRowsPerPage((state) => state.rowsCount);
+  const setRowsPerPage = useRowsPerPage((state) => state.setRowsCount);
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
+  const handleRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value))
+  }
   const [items, setItems] = React.useState<RecordItem[]>([]);
   const [columns, setColumns] = React.useState<Column[]>([]);
   const dataSet: ComponentFramework.PropertyTypes.DataSet =
@@ -240,7 +246,8 @@ export const MainTableComponent: React.FC = () => {
             }}
             component="div"
             count={items.length}
-            rowsPerPage={10}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleRowsPerPage}
             page={page}
             onPageChange={handleChangePage}
           />

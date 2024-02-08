@@ -34,7 +34,7 @@ export const GridComponent: React.FC = () => {
           item
           xs={12}
           md={8}
-          sx={{ display: "flex", justifyContent: "center" }}
+          sx={{ display: "flex", justifyContent: "center", maxHeight:'100%' }}
         >
           <Box
             sx={{

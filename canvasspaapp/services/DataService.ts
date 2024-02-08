@@ -3,7 +3,7 @@ import { signInAndGetToken } from "./AuthorizationService";
 
 export let _context: ComponentFramework.Context<IInputs>;
 export let _childRecodSchema: string = "new_childrecord";
-let eventEntitySchema: string = "new_contactevents";
+let eventEntitySchema: string = "new_contactevent";
 let eventEntityNameSchema: string = "new_name";
 let eventEntityDateSchema: string = "new_eventdate";
 let eventRelatedEntitySchema: string = "new_contact";
@@ -85,14 +85,13 @@ export const getSelectedChildRecords = async (selectedRecordId: string) => {
 
   if (appType == "model") {
     let fetchXml = `?fetchXml=<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false' top='9'>
-    <entity name='new_contactevent'>
-        <attribute name='new_contacteventid' />
-        <attribute name='new_name' />
-        <attribute name='createdon' />
-        <attribute name='new_eventdate' />
-        <order attribute='new_eventdate' descending='true' />
+    <entity name='${eventEntitySchema}'>
+        <attribute name='${eventEntitySchema}id' />
+        <attribute name='${eventEntityNameSchema}' />
+        <attribute name='${eventEntityDateSchema}' />
+        <order attribute='${eventEntityDateSchema}' descending='true' />
         <filter type='and'>
-        <condition attribute='new_contact' operator='eq' value='${selectedRecordId}' />
+        <condition attribute='${eventRelatedEntitySchema}' operator='eq' value='${selectedRecordId}' />
         </filter>
     </entity>
       </fetch>`;
@@ -103,7 +102,7 @@ export const getSelectedChildRecords = async (selectedRecordId: string) => {
     );
     results = response.entities;
   } else {
-    let uri = `${environmentUrl}/api/data/v9.2/${eventEntitySchema}?$select=_${eventRelatedEntitySchema}_value,${eventEntityDateSchema},${eventEntityNameSchema}&$filter=_${eventRelatedEntitySchema}_value eq ${selectedRecordId}`;
+    let uri = `${environmentUrl}/api/data/v9.2/${eventEntitySchema}s?$select=_${eventRelatedEntitySchema}_value,${eventEntityDateSchema},${eventEntityNameSchema}&$filter=_${eventRelatedEntitySchema}_value eq ${selectedRecordId}`;
     let response = await RetrieveMultipleXhr(accessToken, uri);
     results = response.value;
   }

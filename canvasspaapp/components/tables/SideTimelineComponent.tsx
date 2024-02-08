@@ -35,16 +35,6 @@ export const SideTimelineComponent: React.FC = () => {
   }, [selectedRecord, dialogStatus]);
 
 
-
-  const demoTimelineItems = {
-    entities: [
-        {"new_name" : "Wake up", "new_eventdate": "2023-01-01"}, 
-        {"new_name" : "Get Breakfast", "new_eventdate": "2023-01-02"}, 
-        {"new_name" : "Code a bit", "new_eventdate": "2023-01-03"}, 
-        {"new_name" : "Go to sleep", "new_eventdate": "2023-01-04"}, 
-    ]
-  }
-
   return (
     <Box sx={{ maxWidth: "100%", height: "100%" }}>
       <Timeline
