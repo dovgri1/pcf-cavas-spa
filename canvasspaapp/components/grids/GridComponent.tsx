@@ -57,6 +57,7 @@ export const GridComponent: React.FC = () => {
               display: "flex",
               justifyContent: "center",
               overFlowY: "auto",
+              maxHeight:'100%'
             }}
           >
             <Paper

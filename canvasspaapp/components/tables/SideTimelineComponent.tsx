@@ -46,17 +46,18 @@ export const SideTimelineComponent: React.FC = () => {
   }
 
   return (
-    <Box sx={{ width: "100%", height: "100%" }}>
+    <Box sx={{ maxWidth: "100%", height: "100%" }}>
       <Timeline
         position="alternate"
         sx={{
-          width:"100%",
+          maxWidth:"100%",
           height:'100%',
           overflowY: "auto", // Corrected property for vertical scrolling
           display: "flex",
           flexDirection: "column", // Ensures items are laid out vertically
           flexWrap: "nowrap", // Prevents wrapping of items
-          justifyContent: "flex-start", // Aligns items to the start of the flex container
+          justifyContent: "flex-start",
+          justifyItems: "center"
           
         }}
       >

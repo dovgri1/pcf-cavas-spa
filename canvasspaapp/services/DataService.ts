@@ -84,7 +84,7 @@ export const getSelectedChildRecords = async (selectedRecordId: string) => {
   let results: Entity[];
 
   if (appType == "model") {
-    let fetchXml = `?fetchXml=<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false' top='5'>
+    let fetchXml = `?fetchXml=<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false' top='9'>
     <entity name='new_contactevent'>
         <attribute name='new_contacteventid' />
         <attribute name='new_name' />

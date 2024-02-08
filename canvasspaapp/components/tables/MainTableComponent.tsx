@@ -147,13 +147,13 @@ export const MainTableComponent: React.FC = () => {
             }}
           >
             <Typography
-              sx={{ justifyContent: "center", display: "flex" }}
+              sx={{ justifyContent: "center", justifyItems: "center", display: "flex" }}
               variant="h5"
             >
               {"Record Events " + selectedRecord["fullname"]}
             </Typography>
           </Box>
-          <Box sx={{ height: { xs: "65%", md: "80%" }, ml: 2, mr: 2 }}>
+          <Box sx={{ height: { xs: "65%", md: "80%" } }}>
             <SideTimelineComponent />
           </Box>
           <Box
