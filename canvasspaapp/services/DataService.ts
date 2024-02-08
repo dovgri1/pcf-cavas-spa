@@ -156,7 +156,7 @@ const RetrieveMultipleXhr = (
     req.setRequestHeader("OData-Version", "4.0");
     req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     req.setRequestHeader("Accept", "application/json");
-    req.setRequestHeader("Prefer", "odata.include-annotations=*");
+    req.setRequestHeader("Prefer", "odata.include-annotations=*, odata.maxpagesize=5");
     req.setRequestHeader("Authorization", `Bearer ${accessToken}`);
     req.onreadystatechange = () => {
       if (req.readyState === 4) {

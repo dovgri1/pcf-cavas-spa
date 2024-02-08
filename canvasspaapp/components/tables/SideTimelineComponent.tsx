@@ -17,13 +17,24 @@ export const SideTimelineComponent: React.FC = () => {
   const [timelineItems, setTimelineItems] =
     React.useState<Entity[]>();
 
+
   React.useEffect(() => {
-    if (selectedRecord?.id != undefined && dialogStatus == false) {
-      getSelectedChildRecords(selectedRecord?.id).then((childRecords) => {
-        setTimelineItems(childRecords);
-      });
-    }
+    const fetchData = async () => {
+      if (selectedRecord?.id !== undefined && dialogStatus === false) {
+        try {
+          const childRecords = await getSelectedChildRecords(selectedRecord?.id);
+          setTimelineItems(childRecords);
+        } catch (error) {
+          console.error("Failed to fetch child records:", error);
+          // Handle the error as needed
+        }
+      }
+    };
+  
+    fetchData();
   }, [selectedRecord, dialogStatus]);
+
+
 
   const demoTimelineItems = {
     entities: [
@@ -50,7 +61,7 @@ export const SideTimelineComponent: React.FC = () => {
         }}
       >
         {timelineItems?.map((item, index, array) => (
-          <TimelineItem key={item.new_name}>
+          <TimelineItem key={item.new_contacteventid}>
             <TimelineSeparator>
               <TimelineDot color="primary" />
               {index !== array.length - 1 && <TimelineConnector />}
